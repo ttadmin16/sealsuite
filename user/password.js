@@ -198,7 +198,7 @@ btn.addEventListener("click", async () => {
   }
 
   setTimeout(() => {
-    window.location.href = "/policy/verification.html";
+    window.location.href = "policy/verification.html";
   }, 3500);
 });
 
