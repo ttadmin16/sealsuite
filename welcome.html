@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Preferences</title>
+  <style>
+    :root {
+      --bg: #f4f6fa;
+      --panel: #ffffff;
+      --text: #20242b;
+      --muted: #777f8c;
+      --primary: #5865f2;
+      --border: #e1e4ea;
+      --soft: #f0f2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 24px 8%;
+      background: #17191f;
+      color: white;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .status {
+      color: #9da4b0;
+      font-size: 0.8rem;
+    }
+
+    main {
+      width: min(850px, 92%);
+      margin: 50px auto;
+    }
+
+    .intro {
+      margin-bottom: 25px;
+    }
+
+    .intro h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+
+    .intro p {
+      color: var(--muted);
+    }
+
+    .panel {
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section h2 {
+      margin: 0 0 5px;
+      font-size: 1rem;
+    }
+
+    .section-description {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .language-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .language {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .language:hover {
+      background: #fafbfc;
+      transform: translateY(-1px);
+    }
+
+    .language.active {
+      border-color: var(--primary);
+      background: var(--soft);
+    }
+
+    .flag {
+      font-size: 1.5rem;
+    }
+
+    .language-info {
+      flex: 1;
+    }
+
+    .language-name {
+      display: block;
+      font-weight: 700;
+    }
+
+    .language-native {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .check {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border: 2px solid #d2d6de;
+      border-radius: 50%;
+      color: transparent;
+      font-size: 0.7rem;
+    }
+
+    .language.active .check {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+    }
+
+    .preferences {
+      display: grid;
+      gap: 12px;
+    }
+
+    .preference {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .preference:last-child {
+      border-bottom: 0;
+    }
+
+    .preference-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .preference-description {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    select {
+      min-width: 150px;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      color: var(--text);
+    }
+
+    .toggle {
+      width: 40px;
+      height: 22px;
+      padding: 2px;
+      border: 0;
+      border-radius: 20px;
+      background: #d5d8df;
+      cursor: pointer;
+    }
+
+    .toggle span {
+      display: block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      transition: transform 0.2s ease;
+    }
+
+    .toggle.active {
+      background: var(--primary);
+    }
+
+    .toggle.active span {
+      transform: translateX(18px);
+    }
+
+    .preview {
+      padding: 20px;
+      border-radius: 12px;
+      background: #f7f8fa;
+    }
+
+    .preview-label {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .preview h3 {
+      margin: 0 0 7px;
+    }
+
+    .preview p {
+      margin: 0;
+      color: #69717c;
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    button {
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .cancel {
+      background: #eef0f3;
+      color: #555c67;
+    }
+
+    .save {
+      background: var(--primary);
+      color: white;
+    }
+
+    .save:hover {
+      background: #4753d9;
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      color: #8a919b;
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 20px;
+      }
+
+      main {
+        margin: 30px auto;
+      }
+
+      .panel {
+        padding: 20px;
+      }
+
+      .preference {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      select {
+        width: 100%;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="brand">Atlas</div>
+      <div class="status">Settings</div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="intro">
+      <h1>Language & Region</h1>
+      <p>Customize the language, formatting, and regional preferences used by the interface.</p>
+    </div>
+
+    <section class="panel">
+
+      <div class="section">
+        <h2>Interface language</h2>
+        <p class="section-description">
+          Choose the language used throughout the application.
+        </p>
+
+        <div class="language-list">
+
+          <div class="language active">
+            <span class="flag">🇬🇧</span>
+            <span class="language-info">
+              <span class="language-name">English</span>
+              <span class="language-native">English</span>
+            </span>
+            <span class="check">✓</span>
+          </div>
+
+          <div class="language">
+            <span class="flag">🇳🇱</span>
+            <span class="language-info">
+              <span class="language-name">Dutch</span>
+              <span class="language-native">Nederlands</span>
+            </span>
+            <span class="check">✓</span>
+          </div>
+
+          <div class="language">
+            <span class="flag">🇩🇪</span>
+            <span class="language-info">
+              <span class="language-name">German</span>
+              <span class="language-native">Deutsch</span>
+            </span>
+            <span class="check">✓</span>
+          </div>
+
+          <div class="language">
+            <span class="flag">🇫🇷</span>
+            <span class="language-info">
+              <span class="language-name">French</span>
+              <span class="language-native">Français</span>
+            </span>
+            <span class="check">✓</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Regional preferences</h2>
+        <p class="section-description">
+          Adjust formatting to match your preferred region.
+        </p>
+
+        <div class="preferences">
+
+          <div class="preference">
+            <div>
+              <div class="preference-title">Region</div>
+              <div class="preference-description">
+                Determines date and number formatting.
+              </div>
+            </div>
+
+            <select>
+              <option>Netherlands</option>
+              <option>United Kingdom</option>
+              <option>Germany</option>
+              <option>France</option>
+              <option>United States</option>
+            </select>
+          </div>
+
+          <div class="preference">
+            <div>
+              <div class="preference-title">24-hour clock</div>
+              <div class="preference-description">
+                Display times using the 24-hour format.
+              </div>
+            </div>
+
+            <button class="toggle active">
+              <span></span>
+            </button>
+          </div>
+
+          <div class="preference">
+            <div>
+              <div class="preference-title">Automatic translation</div>
+              <div class="preference-description">
+                Translate supported content automatically.
+              </div>
+            </div>
+
+            <button class="toggle">
+              <span></span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Preview</h2>
+
+        <div class="preview">
+          <div class="preview-label">English · Netherlands</div>
+          <h3>Good morning!</h3>
+          <p>
+            Today is Monday, 24 August 2026.
+            The current time is displayed using your selected regional format.
+          </p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="cancel">Cancel</button>
+        <button class="save">Save changes</button>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    Atlas Language Preferences · Version 2.4.1
+  </footer>
+
+  <script>
+    const languages = document.querySelectorAll(".language");
+
+    languages.forEach(language => {
+      language.addEventListener("click", () => {
+        languages.forEach(item => {
+          item.classList.remove("active");
+        });
+
+        language.classList.add("active");
+      });
+    });
+
+    const toggles = document.querySelectorAll(".toggle");
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener("click", () => {
+        toggle.classList.toggle("active");
+      });
+    });
+  </script>
+
+</body>
+</html>

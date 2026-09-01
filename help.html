@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locale Center</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #101217;
+      color: #eef0f4;
+      font-family: Arial, sans-serif;
+    }
+
+    .shell {
+      width: min(900px, 94%);
+      margin: 50px auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .version {
+      color: #707782;
+      font-family: monospace;
+      font-size: 0.75rem;
+    }
+
+    .window {
+      overflow: hidden;
+      border: 1px solid #292d35;
+      border-radius: 18px;
+      background: #17191e;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    .window-header {
+      padding: 25px 30px;
+      border-bottom: 1px solid #292d35;
+    }
+
+    .window-header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .window-header p {
+      margin: 7px 0 0;
+      color: #7d848e;
+      font-size: 0.82rem;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 500px;
+    }
+
+    .sidebar {
+      padding: 20px;
+      border-right: 1px solid #292d35;
+      background: #14161a;
+    }
+
+    .sidebar-title {
+      margin: 0 0 10px;
+      color: #646b76;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .side-link {
+      display: block;
+      padding: 10px 12px;
+      margin: 3px 0;
+      border-radius: 8px;
+      color: #9298a2;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+
+    .side-link:hover {
+      background: #1d2026;
+      color: #fff;
+    }
+
+    .side-link.active {
+      background: #292d45;
+      color: #8d98ff;
+    }
+
+    .settings {
+      padding: 30px;
+    }
+
+    .setting-block {
+      margin-bottom: 30px;
+    }
+
+    .setting-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .setting-heading h2 {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .setting-heading span {
+      color: #636a75;
+      font-family: monospace;
+      font-size: 0.68rem;
+    }
+
+    .language-current {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 17px;
+      border: 1px solid #30343c;
+      border-radius: 11px;
+      background: #1b1e24;
+    }
+
+    .language-current .flag {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: #252932;
+      font-size: 1.3rem;
+    }
+
+    .language-current strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .language-current small {
+      display: block;
+      margin-top: 3px;
+      color: #777e88;
+    }
+
+    .change {
+      margin-left: auto;
+      padding: 7px 12px;
+      border: 1px solid #393e49;
+      border-radius: 7px;
+      background: transparent;
+      color: #aeb4bd;
+      cursor: pointer;
+    }
+
+    .change:hover {
+      background: #252932;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #282c33;
+    }
+
+    .option:last-child {
+      border-bottom: 0;
+    }
+
+    .option-title {
+      font-size: 0.82rem;
+    }
+
+    .option-description {
+      margin-top: 4px;
+      color: #6f7680;
+      font-size: 0.7rem;
+    }
+
+    select {
+      min-width: 155px;
+      padding: 9px 12px;
+      border: 1px solid #353a44;
+      border-radius: 7px;
+      background: #202329;
+      color: #d9dce1;
+      outline: none;
+    }
+
+    select:focus {
+      border-color: #6874ff;
+    }
+
+    .switch {
+      width: 38px;
+      height: 21px;
+      padding: 2px;
+      border: 0;
+      border-radius: 20px;
+      background: #373c45;
+      cursor: pointer;
+    }
+
+    .switch span {
+      display: block;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: #858b94;
+      transition: transform 0.2s ease;
+    }
+
+    .switch.on {
+      background: #5f6bf2;
+    }
+
+    .switch.on span {
+      transform: translateX(17px);
+      background: #fff;
+    }
+
+    .preview {
+      padding: 20px;
+      border: 1px solid #30343c;
+      border-radius: 11px;
+      background: #121419;
+    }
+
+    .preview-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: #626a75;
+      font-family: monospace;
+      font-size: 0.68rem;
+    }
+
+    .preview-content {
+      direction: ltr;
+    }
+
+    .preview-content h3 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .preview-content p {
+      margin: 0;
+      color: #858c96;
+      line-height: 1.65;
+      font-size: 0.82rem;
+    }
+
+    .sample-data {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 17px;
+    }
+
+    .data-cell {
+      padding: 10px;
+      border-radius: 7px;
+      background: #1c1f25;
+    }
+
+    .data-cell small {
+      display: block;
+      color: #636a74;
+      font-size: 0.65rem;
+    }
+
+    .data-cell strong {
+      display: block;
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 0.75rem;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 30px;
+      border-top: 1px solid #292d35;
+      background: #14161a;
+    }
+
+    .footer-status {
+      color: #676e78;
+      font-size: 0.7rem;
+    }
+
+    .footer-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .footer button {
+      padding: 9px 15px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .reset {
+      border: 1px solid #363b44;
+      background: transparent;
+      color: #969ca5;
+    }
+
+    .apply {
+      border: 1px solid #5d69f4;
+      background: #5d69f4;
+      color: white;
+    }
+
+    .apply:hover {
+      background: #4d59df;
+    }
+
+    @media (max-width: 700px) {
+      .shell {
+        margin: 20px auto;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .settings {
+        padding: 22px;
+      }
+
+      .sample-data {
+        grid-template-columns: 1fr;
+      }
+
+      .option {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+      }
+
+      select {
+        width: 100%;
+      }
+
+      .footer {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="shell">
+
+    <div class="topbar">
+      <div class="logo">NORTHSTAR</div>
+      <div class="version">locale.core / 4.8.2</div>
+    </div>
+
+    <div class="window">
+
+      <div class="window-header">
+        <h1>Localization</h1>
+        <p>Configure language and regional display preferences.</p>
+      </div>
+
+      <div class="content">
+
+        <aside class="sidebar">
+          <p class="sidebar-title">Preferences</p>
+
+          <a href="#" class="side-link active">
+            Language
+          </a>
+
+          <a href="#" class="side-link">
+            Region
+          </a>
+
+          <a href="#" class="side-link">
+            Date & Time
+          </a>
+
+          <a href="#" class="side-link">
+            Numbers
+          </a>
+
+          <a href="#" class="side-link">
+            Keyboard
+          </a>
+
+          <p class="sidebar-title" style="margin-top: 25px;">
+            System
+          </p>
+
+          <a href="#" class="side-link">
+            Accessibility
+          </a>
+
+          <a href="#" class="side-link">
+            Interface
+          </a>
+        </aside>
+
+        <section class="settings">
+
+          <div class="setting-block">
+
+            <div class="setting-heading">
+              <h2>Current language</h2>
+              <span>LANG-01</span>
+            </div>
+
+            <div class="language-current">
+              <div class="flag">🇬🇧</div>
+
+              <div>
+                <strong>English</strong>
+                <small>English (United Kingdom)</small>
+              </div>
+
+              <button class="change">
+                Change
+              </button>
+            </div>
+
+          </div>
+
+          <div class="setting-block">
+
+            <div class="setting-heading">
+              <h2>Regional format</h2>
+              <span>REG-02</span>
+            </div>
+
+            <div class="option">
+              <div>
+                <div class="option-title">Country / Region</div>
+                <div class="option-description">
+                  Used for formatting dates and numbers.
+                </div>
+              </div>
+
+              <select>
+                <option>United Kingdom</option>
+                <option>Netherlands</option>
+                <option>Germany</option>
+                <option>France</option>
+                <option>United States</option>
+              </select>
+            </div>
+
+            <div class="option">
+              <div>
+                <div class="option-title">Date format</div>
+                <div class="option-description">
+                  Choose how dates appear throughout the interface.
+                </div>
+              </div>
+
+              <select>
+                <option>24 August 2026</option>
+                <option>24/08/2026</option>
+                <option>2026-08-24</option>
+              </select>
+            </div>
+
+            <div class="option">
+              <div>
+                <div class="option-title">Clock format</div>
+                <div class="option-description">
+                  Select your preferred time notation.
+                </div>
+              </div>
+
+              <select>
+                <option>24-hour</option>
+                <option>12-hour</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="setting-block">
+
+            <div class="setting-heading">
+              <h2>Interface behavior</h2>
+              <span>UI-03</span>
+            </div>
+
+            <div class="option">
+              <div>
+                <div class="option-title">
+                  Automatic language detection
+                </div>
+
+                <div class="option-description">
+                  Detect your browser's preferred language.
+                </div>
+              </div>
+
+              <button class="switch on">
+                <span></span>
+              </button>
+            </div>
+
+            <div class="option">
+              <div>
+                <div class="option-title">
+                  Use localized numbers
+                </div>
+
+                <div class="option-description">
+                  Format numbers according to your region.
+                </div>
+              </div>
+
+              <button class="switch on">
+                <span></span>
+              </button>
+            </div>
+
+          </div>
+
+          <div class="setting-block">
+
+            <div class="setting-heading">
+              <h2>Preview</h2>
+              <span>PREVIEW</span>
+            </div>
+
+            <div class="preview">
+
+              <div class="preview-bar">
+                <span>LANGUAGE PREVIEW</span>
+                <span>en-GB</span>
+              </div>
+
+              <div class="preview-content">
+                <h3>Welcome back</h3>
+
+                <p>
+                  Your preferences have been updated.
+                  Here is an example of how localized content
+                  may appear throughout the application.
+                </p>
+
+                <div class="sample-data">
+
+                  <div class="data-cell">
+                    <small>DATE</small>
+                    <strong>24/08/2026</strong>
+                  </div>
+
+                  <div class="data-cell">
+                    <small>TIME</small>
+                    <strong>01:35</strong>
+                  </div>
+
+                  <div class="data-cell">
+                    <small>NUMBER</small>
+                    <strong>12,450.75</strong>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <div class="footer">
+
+        <div class="footer-status">
+          ● All preferences saved locally
+        </div>
+
+        <div class="footer-buttons">
+          <button class="reset">
+            Reset
+          </button>
+
+          <button class="apply">
+            Apply changes
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    const switches = document.querySelectorAll(".switch");
+
+    switches.forEach(button => {
+      button.addEventListener("click", () => {
+        button.classList.toggle("on");
+      });
+    });
+
+    const changeButton = document.querySelector(".change");
+
+    changeButton.addEventListener("click", () => {
+      alert("Language selector opened.");
+    });
+
+    const resetButton = document.querySelector(".reset");
+
+    resetButton.addEventListener("click", () => {
+      switches.forEach(button => {
+        button.classList.remove("on");
+      });
+
+      switches[0].classList.add("on");
+      switches[1].classList.add("on");
+    });
+  </script>
+
+</body>
+</html>
