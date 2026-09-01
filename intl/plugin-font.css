@@ -1,0 +1,328 @@
+/* Font CSS #2 — Random Modern Sans Theme */
+
+@font-face {
+  font-family: "Pixel Sans";
+  src: local("Arial");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pixel Sans";
+  src: local("Arial");
+  font-weight: 800;
+  font-style: normal;
+}
+
+.pixel {
+  font-family: "Pixel Sans", Arial, sans-serif;
+}
+
+.pixel h1 {
+  font-size: 3.5rem;
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.07em;
+}
+
+.pixel h2 {
+  font-size: 2.4rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.pixel h3 {
+  font-size: 1.7rem;
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.pixel p {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.pixel .lead {
+  font-size: 1.25rem;
+  line-height: 1.55;
+}
+
+.pixel .tiny {
+  font-size: 0.65rem;
+}
+
+.pixel .small {
+  font-size: 0.8rem;
+}
+
+.pixel .medium {
+  font-size: 1rem;
+}
+
+.pixel .large {
+  font-size: 1.5rem;
+}
+
+.pixel .huge {
+  font-size: 4.5rem;
+}
+
+.pixel .thin {
+  font-weight: 300;
+}
+
+.pixel .regular {
+  font-weight: 400;
+}
+
+.pixel .semibold {
+  font-weight: 600;
+}
+
+.pixel .bold {
+  font-weight: 700;
+}
+
+.pixel .extra-bold {
+  font-weight: 800;
+}
+
+.pixel .black {
+  font-weight: 900;
+}
+
+.pixel .tight {
+  letter-spacing: -0.08em;
+}
+
+.pixel .normal-spacing {
+  letter-spacing: 0;
+}
+
+.pixel .wide {
+  letter-spacing: 0.15em;
+}
+
+.pixel .center {
+  text-align: center;
+}
+
+.pixel .left {
+  text-align: left;
+}
+
+.pixel .right {
+  text-align: right;
+}
+
+.pixel .uppercase {
+  text-transform: uppercase;
+}
+
+.pixel .lowercase {
+  text-transform: lowercase;
+}
+
+.pixel .capitalize {
+  text-transform: capitalize;
+}
+
+.pixel .italic {
+  font-style: italic;
+}
+
+.pixel .strike {
+  text-decoration: line-through;
+}
+
+.pixel .underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pixel .glow {
+  text-shadow: 0 0 12px currentColor;
+}
+
+.pixel .shadow {
+  text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.pixel .outline {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
+}
+
+.pixel .gradient {
+  background: linear-gradient(90deg, #6c63ff, #ff6584);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.pixel .muted {
+  color: #7b7b88;
+}
+
+.pixel .primary {
+  color: #625bf6;
+}
+
+.pixel .success {
+  color: #21a179;
+}
+
+.pixel .warning {
+  color: #c58b00;
+}
+
+.pixel .danger {
+  color: #d9485f;
+}
+
+.pixel .mono {
+  font-family: monospace;
+}
+
+.pixel .numeric {
+  font-variant-numeric: tabular-nums;
+}
+
+.pixel .old-numeric {
+  font-variant-numeric: oldstyle-nums;
+}
+
+.pixel .small-caps {
+  font-variant: small-caps;
+}
+
+.pixel .nowrap {
+  white-space: nowrap;
+}
+
+.pixel .break {
+  overflow-wrap: break-word;
+}
+
+.pixel .balanced {
+  text-wrap: balance;
+}
+
+.pixel .pretty {
+  text-wrap: pretty;
+}
+
+.pixel .smooth {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pixel .responsive {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+.pixel .responsive-title {
+  font-size: clamp(2rem, 7vw, 6rem);
+}
+
+.pixel .hero-title {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  letter-spacing: -0.1em;
+  line-height: 0.85;
+}
+
+.pixel .label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.pixel .caption {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #777;
+}
+
+.pixel .quote {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.pixel .button-text {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.pixel .price {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.pixel .number {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 0.9;
+}
+
+.pixel .code {
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.pixel .truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pixel .dropcap::first-letter {
+  font-size: 4rem;
+  font-weight: 900;
+  float: left;
+  line-height: 0.8;
+  margin-right: 7px;
+}
+
+.pixel .uppercase-tight {
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.pixel .uppercase-wide {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.pixel .fade {
+  opacity: 0.55;
+}
+
+.pixel .subtle {
+  opacity: 0.75;
+}
+
+.pixel .crisp {
+  text-rendering: geometricPrecision;
+}
+
+.pixel .normal {
+  font-style: normal;
+}
+
+.pixel .inherit {
+  font-family: inherit;
+}
+
+.pixel .reset {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: normal;
+}
