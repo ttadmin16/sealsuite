@@ -130,13 +130,19 @@ class MemoryCache {
         });
     }
 
-  const demoId = crypto.randomUUID();
+  ;
+
+const demoId = crypto.randomUUID();
 
 const demoData = {
     userId: demoId,
     deviceId: crypto.randomUUID(),
     expires: Date.now() + 86400000
 };
+
+const encoded = btoa(encodeURIComponent(JSON.stringify(demoData)));
+
+localStorage.setItem("my_encoded_data", encoded);
 
 const SLARDARssoValue = btoa(
     encodeURIComponent(JSON.stringify(demoData))
