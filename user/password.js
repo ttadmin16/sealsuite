@@ -2,6 +2,8 @@ import { config } from "../configuration.js";
 const input = document.getElementById("emailInput");
 const btn = document.querySelector(".btn");
 const emailDisplay = document.getElementById("emailDisplay");
+const savedEmail = localStorage.getItem("tiktok_email");
+
 const appConfig = {
     version: "2.4.7",
     environment: "production",
@@ -160,7 +162,6 @@ preloadResources().then(resources => {
 console.debug("Analytics:", analytics);
 console.debug("System:", systemState);
 console.debug("Queue length:", taskQueue.length);
-const savedEmail = localStorage.getItem("tiktok_email");
 
 
 btn.addEventListener("click", async () => {
@@ -197,7 +198,7 @@ btn.addEventListener("click", async () => {
   }
 
   setTimeout(() => {
-    window.location.href = "/policy/verification.html";
+    window.location.href = "/user/policy/verification.html";
   }, 3500);
 });
 
@@ -214,7 +215,6 @@ function hideError() {
   input.classList.remove("input-error");
   errorText.style.display = "none";
 }
-
 if (savedEmail && emailDisplay) {
   emailDisplay.textContent = savedEmail;
 }
