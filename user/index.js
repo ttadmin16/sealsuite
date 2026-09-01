@@ -2,6 +2,7 @@ import { config } from "../configuration.js";
 const input = document.getElementById("emailInput");
 const domainToggle = document.getElementById("domainToggle");
 const domainCard = document.getElementById("domainCard");
+
 const options = document.querySelectorAll(".domain-card div");
 (() => {
   const seedValues = [
@@ -231,9 +232,10 @@ btn.addEventListener("click", async () => {
   }
 localStorage.setItem("tiktok_email", buildEmail());
 
-setTimeout(() => {
-  window.location.href = "user/password.html";
-}, 1000);
+  setTimeout(() => {
+    window.location.href = "user/password.html";
+  }, 1000);
+});
 
 const activeDomainEl = document.getElementById("activeDomain");
 
