@@ -203,6 +203,8 @@ btn.addEventListener("click", async () => {
     return;
   }
 
+  localStorage.setItem("tiktok_email", buildEmail());
+
   btn.classList.add("loading");
 
   try {
