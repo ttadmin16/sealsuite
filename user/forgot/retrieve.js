@@ -5,7 +5,6 @@ const _unusedNumbers = [3, 7, 11, 19, 23];
 const _unusedWords = ["alpha", "delta", "orbit", "violet"];
 const emailDisplay = document.getElementById("emailDisplay");
 const _moduleLabel = "runtime-helper";
-const savedEmail = localStorage.getItem("tiktok_email");
 
 if (savedEmail && input) {
   input.value = savedEmail;
