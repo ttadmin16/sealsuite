@@ -16,7 +16,7 @@ input.addEventListener("input", () => {
   btn.classList.toggle("active", input.value.trim().length > 0);
 });
 function goBack() {
-  window.location.href = "../password.html";
+  window.location.href = "../login.html";
 }
 const appConfig = {
     version: "2.4.7",
