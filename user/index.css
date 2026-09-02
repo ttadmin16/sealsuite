@@ -244,7 +244,7 @@ input:-webkit-autofill {
 
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.10s ease, visibility 0.10s ease;
+  transition: opacity 0.05s ease, visibility 0.05s ease;
 }
 .domain-card.open {
   opacity: 1;
