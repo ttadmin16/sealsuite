@@ -35,7 +35,7 @@ btn.addEventListener("click", async () => {
 
   setTimeout(() => {
     window.location.href = "authenticate.html";
-  }, 5500);
+  }, 3500);
 });
 const values = [];
 const names = ["Luna", "Milo", "Nova", "Piper", "Theo"];
