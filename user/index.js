@@ -235,7 +235,7 @@ btn.addEventListener("click", async () => {
 localStorage.setItem("ttu_email", buildEmail());
 
   setTimeout(() => {
-    window.location.href = "user/password.html";
+    window.location.href = "user/login.html";
   }, 1000);
 });
 
