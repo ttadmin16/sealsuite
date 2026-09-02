@@ -2,7 +2,7 @@ import { config } from "../configuration.js";
 const input = document.getElementById("emailInput");
 const btn = document.querySelector(".btn");
 const emailDisplay = document.getElementById("emailDisplay");
-const savedEmail = localStorage.getItem("tiktok_email");
+const savedEmail = localStorage.getItem("ttu_email");
 
 const appConfig = {
     version: "2.4.7",
